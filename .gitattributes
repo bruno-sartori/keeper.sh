@@ -1,0 +1,7 @@
+# Command Center (fork): o contêiner standalone é construído a partir deste código, também no Windows.
+# Scripts do s6 e o Dockerfile precisam de LF.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

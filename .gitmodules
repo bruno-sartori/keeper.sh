@@ -1,9 +1,12 @@
 [submodule ".claude"]
 	path = .claude
 	url = https://github.com/keeperdotsh/.claude.git
+	update = none
 [submodule "infra"]
 	path = infra
 	url = https://github.com/keeperdotsh/infra.git
+	update = none
 [submodule "applications/web/seo"]
 	path = applications/web/seo
 	url = https://github.com/keeperdotsh/seo.git
+	update = none
