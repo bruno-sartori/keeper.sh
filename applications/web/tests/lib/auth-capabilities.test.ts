@@ -39,9 +39,9 @@ describe("resolveCredentialField", () => {
     })).toEqual({
       autoComplete: "username",
       id: "username",
-      label: "Username",
+      label: "Username or email",
       name: "username",
-      placeholder: "johndoe",
+      placeholder: "johndoe or you@example.com",
       type: "text",
     });
   });

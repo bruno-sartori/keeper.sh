@@ -1,6 +1,7 @@
 import { APIError, createAuthEndpoint } from "better-auth/api";
 import { object, string } from "zod";
 import type { CredentialAccount, User } from "../types";
+import { normalizeUsername } from "../utils/username";
 
 const INVALID_CREDENTIALS_ERROR = {
   message: "invalid username or password",
@@ -12,7 +13,7 @@ const createSignInEndpoint = () =>
     {
       body: object({
         password: string(),
-        username: string().regex(/^[a-zA-Z0-9._-]+$/),
+        username: string().transform(normalizeUsername).pipe(string().regex(/^[^\s]+$/)),
       }),
       method: "POST",
     },

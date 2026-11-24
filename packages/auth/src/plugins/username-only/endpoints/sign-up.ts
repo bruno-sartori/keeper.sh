@@ -1,6 +1,7 @@
 import { APIError, createAuthEndpoint } from "better-auth/api";
 import { object, string } from "zod";
 import type { UsernameOnlyConfig } from "../utils/config";
+import { USERNAME_FORMAT_MESSAGE, isValidUsername, normalizeUsername } from "../utils/username";
 import type { User } from "../types";
 
 const createSignUpEndpoint = (config: UsernameOnlyConfig) =>
@@ -11,12 +12,8 @@ const createSignUpEndpoint = (config: UsernameOnlyConfig) =>
         name: string().optional(),
         password: string().min(config.minPasswordLength).max(config.maxPasswordLength),
         username: string()
-          .min(config.minUsernameLength)
-          .max(config.maxUsernameLength)
-          .regex(
-            /^[a-zA-Z0-9._-]+$/,
-            "username can only contain letters, numbers, dots, underscores, and hyphens",
-          ),
+          .transform(normalizeUsername)
+          .refine((value) => isValidUsername(value, config), USERNAME_FORMAT_MESSAGE),
       }),
       method: "POST",
     },
